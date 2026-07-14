@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { SeoHead } from '../components/UI/SeoHead';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { RuleList } from '../components/Compliance/RuleList';
 import { ComplianceCheck } from '../components/Compliance/ComplianceCheck';
@@ -11,9 +12,9 @@ export function CompliancePage() {
   return (
     <RequireWallet>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold text-[#e8e8f0]">Compliance Rules</h2>
+        <SeoHead title="Compliance Rules" description="Configure granular compliance rules for permissioned tokens" />
+        <div>
+          <h2 className="text-2xl font-bold text-[#e8e8f0]">Compliance Rules</h2>
             <p className="text-sm text-[#606080] mt-1">
               Configure granular compliance rules for permissioned tokens
             </p>

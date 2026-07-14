@@ -1,3 +1,4 @@
+import { SeoHead } from '../components/UI/SeoHead';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { IdentityCard } from '../components/Identity/IdentityCard';
 import { Card, CardTitle, CardContent } from '../components/UI/Card';
@@ -7,6 +8,7 @@ export function IdentityPage() {
   return (
     <RequireWallet>
       <div className="space-y-6">
+        <SeoHead title="Identity Registry" description="Manage your decentralized identity and KYC proofs" />
         <div>
           <h2 className="text-2xl font-bold text-[#e8e8f0]">Identity Registry</h2>
           <p className="text-sm text-[#606080] mt-1">
