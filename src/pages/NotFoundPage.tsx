@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import { SeoHead } from '../components/UI/SeoHead';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { Button } from '../components/UI/Button';
 import { Card, CardTitle, CardContent } from '../components/UI/Card';
 
 export function NotFoundPage() {
+  usePageTitle('Page Not Found');
   return (
     <div className="flex items-center justify-center min-h-[60vh] p-4">
       <SeoHead title="Page Not Found" description="The requested page could not be found" />

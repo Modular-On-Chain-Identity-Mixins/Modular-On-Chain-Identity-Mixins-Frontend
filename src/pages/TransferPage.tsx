@@ -1,4 +1,5 @@
 import { SeoHead } from '../components/UI/SeoHead';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { TokenTransfer } from '../components/Token/TokenTransfer';
 import { TokenBalance } from '../components/Token/TokenBalance';
@@ -6,6 +7,7 @@ import { TransactionHistory } from '../components/Token/TransactionHistory';
 import { Card, CardTitle, CardContent } from '../components/UI/Card';
 
 export function TransferPage() {
+  usePageTitle('Token Transfers');
   return (
     <RequireWallet>
       <div className="space-y-6">

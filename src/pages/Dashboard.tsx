@@ -1,4 +1,5 @@
 import { SeoHead } from '../components/UI/SeoHead';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { useWalletStore } from '../contexts/WalletContext';
 import { WalletStatus } from '../components/Wallet/WalletStatus';
 import { IdentityCard } from '../components/Identity/IdentityCard';
@@ -7,6 +8,7 @@ import { TokenBalance } from '../components/Token/TokenBalance';
 import { Card, CardTitle, CardContent } from '../components/UI/Card';
 
 export function Dashboard() {
+  usePageTitle('Dashboard');
   const { isConnected } = useWalletStore();
 
   return (
