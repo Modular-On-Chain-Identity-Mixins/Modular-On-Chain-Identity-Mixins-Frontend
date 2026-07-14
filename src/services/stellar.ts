@@ -25,7 +25,7 @@ function getServer(network: string): rpc.Server {
   return new rpc.Server(RPC_URLS[network]);
 }
 
-export async function connectWallet(network: string = 'TESTNET'): Promise<WalletState> {
+export async function connectWallet(network: 'TESTNET' | 'MAINNET' = 'TESTNET'): Promise<WalletState> {
   try {
     const supported = await isAllowed();
     if (!supported) {
