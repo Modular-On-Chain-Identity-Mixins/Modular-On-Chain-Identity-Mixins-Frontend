@@ -1,10 +1,12 @@
 import { SeoHead } from '../components/UI/SeoHead';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { IdentityCard } from '../components/Identity/IdentityCard';
 import { Card, CardTitle, CardContent } from '../components/UI/Card';
 import { Badge } from '../components/UI/Badge';
 
 export function IdentityPage() {
+  usePageTitle('Identity Registry');
   return (
     <RequireWallet>
       <div className="space-y-6">

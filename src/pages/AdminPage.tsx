@@ -1,9 +1,11 @@
 import { SeoHead } from '../components/UI/SeoHead';
+import { usePageTitle } from '../hooks/usePageTitle';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { WhitelistManager } from '../components/Admin/WhitelistManager';
 import { RegistryConfig } from '../components/Admin/RegistryConfig';
 
 export function AdminPage() {
+  usePageTitle('Admin Panel');
   return (
     <RequireWallet>
       <div className="space-y-6">
