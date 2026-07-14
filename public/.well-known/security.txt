@@ -1,0 +1,4 @@
+Contact: mailto:security@example.com
+Preferred-Languages: en
+Encryption: https://example.com/.well-known/pgp-key.txt
+Policy: https://example.com/security-policy
