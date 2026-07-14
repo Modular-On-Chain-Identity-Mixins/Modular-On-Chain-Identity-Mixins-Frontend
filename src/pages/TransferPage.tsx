@@ -2,6 +2,7 @@ import { SeoHead } from '../components/UI/SeoHead';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { TokenTransfer } from '../components/Token/TokenTransfer';
 import { TokenBalance } from '../components/Token/TokenBalance';
+import { TransactionHistory } from '../components/Token/TransactionHistory';
 import { Card, CardTitle, CardContent } from '../components/UI/Card';
 
 export function TransferPage() {
@@ -22,6 +23,7 @@ export function TransferPage() {
           </div>
           <div className="lg:col-span-2 space-y-4">
             <TokenBalance />
+            <TransactionHistory />
             <Card variant="glass">
               <CardTitle>Compliance Flow</CardTitle>
               <CardContent className="space-y-2 text-sm">

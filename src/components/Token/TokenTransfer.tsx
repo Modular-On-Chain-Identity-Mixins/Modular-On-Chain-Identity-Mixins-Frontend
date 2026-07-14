@@ -4,11 +4,13 @@ import { Button } from '../UI/Button';
 import { Input } from '../UI/Input';
 import { Badge } from '../UI/Badge';
 import { useWalletStore } from '../../contexts/WalletContext';
+import { useTransactionStore } from '../../store/transactionStore';
 import { toast } from '../UI/Toast';
 import * as contract from '../../services/contract';
 
 export function TokenTransfer() {
   const { publicKey, address } = useWalletStore();
+  const addTransaction = useTransactionStore((s) => s.addTransaction);
   const [to, setTo] = useState('');
   const [amount, setAmount] = useState('');
   const [sending, setSending] = useState(false);
@@ -50,6 +52,7 @@ export function TokenTransfer() {
         { from: address, to, amount, asset: 'SOROBAN_TOKEN' },
         publicKey,
       );
+      addTransaction({ hash: txHash, status: 'PENDING', timestamp: Date.now() });
       toast(`Transfer submitted: ${txHash.slice(0, 8)}...`, 'success');
       setTo('');
       setAmount('');
