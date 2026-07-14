@@ -22,6 +22,7 @@ export function Select({ label, options, className, id, ...props }: SelectProps)
           'w-full px-3 py-2 rounded-lg bg-[#13131a] border border-[#2a2a3d] text-sm text-[#e8e8f0] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#6c5ce7]/50 focus:border-[#6c5ce7]',
           className,
         )}
+        aria-label={label || undefined}
         {...props}
       >
         {options.map((opt) => (

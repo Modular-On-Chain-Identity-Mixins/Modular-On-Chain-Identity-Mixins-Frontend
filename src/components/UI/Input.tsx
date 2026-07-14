@@ -8,6 +8,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 export function Input({ label, error, className, id, ...props }: InputProps) {
   const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
+  const errorId = error ? `${inputId}-error` : undefined;
 
   return (
     <div className="space-y-1.5">
@@ -23,9 +24,11 @@ export function Input({ label, error, className, id, ...props }: InputProps) {
           error ? 'border-[#ff1744]' : 'border-[#2a2a3d] hover:border-[#3b3b5c]',
           className,
         )}
+        aria-invalid={error ? 'true' : undefined}
+        aria-describedby={errorId}
         {...props}
       />
-      {error && <p className="text-xs text-[#ff1744]">{error}</p>}
+      {error && <p id={errorId} className="text-xs text-[#ff1744]" role="alert">{error}</p>}
     </div>
   );
 }

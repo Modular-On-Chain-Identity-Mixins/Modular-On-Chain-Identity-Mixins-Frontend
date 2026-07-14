@@ -42,7 +42,7 @@ export function ToastContainer() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2" role="status" aria-live="polite" aria-label="Notifications">
       {toasts.map((t) => (
         <div
           key={t.id}
@@ -51,7 +51,7 @@ export function ToastContainer() {
             variants[t.type],
           )}
         >
-          <span className="text-lg">{icons[t.type]}</span>
+          <span className="text-lg" aria-hidden="true">{icons[t.type]}</span>
           <span>{t.message}</span>
         </div>
       ))}

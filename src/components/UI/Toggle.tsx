@@ -19,6 +19,7 @@ export function Toggle({ enabled, onChange, label, disabled }: ToggleProps) {
       )}
       role="switch"
       aria-checked={enabled}
+      aria-label={label || (enabled ? 'Disable' : 'Enable')}
       disabled={disabled}
     >
       <span
