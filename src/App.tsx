@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 import { ErrorBoundary } from './components/UI/ErrorBoundary';
+import { PageErrorBoundary } from './components/UI/PageErrorBoundary';
 import { CardSkeleton } from './components/UI/Skeleton';
 import { ToastContainer } from './components/UI/Toast';
 
@@ -40,12 +41,12 @@ export default function App() {
         <Layout>
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/identity" element={<IdentityPage />} />
-              <Route path="/compliance" element={<CompliancePage />} />
-              <Route path="/transfer" element={<TransferPage />} />
-              <Route path="/admin" element={<AdminPage />} />
-              <Route path="*" element={<NotFoundPage />} />
+              <Route path="/" element={<PageErrorBoundary name="Dashboard"><Dashboard /></PageErrorBoundary>} />
+              <Route path="/identity" element={<PageErrorBoundary name="Identity"><IdentityPage /></PageErrorBoundary>} />
+              <Route path="/compliance" element={<PageErrorBoundary name="Compliance"><CompliancePage /></PageErrorBoundary>} />
+              <Route path="/transfer" element={<PageErrorBoundary name="Transfer"><TransferPage /></PageErrorBoundary>} />
+              <Route path="/admin" element={<PageErrorBoundary name="Admin"><AdminPage /></PageErrorBoundary>} />
+              <Route path="*" element={<PageErrorBoundary name="NotFound"><NotFoundPage /></PageErrorBoundary>} />
             </Routes>
           </Suspense>
         </Layout>
