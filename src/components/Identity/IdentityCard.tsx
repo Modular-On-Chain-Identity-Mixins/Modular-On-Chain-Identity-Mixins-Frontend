@@ -3,6 +3,7 @@ import { useWalletStore } from '../../contexts/WalletContext';
 import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
 import { Badge } from '../UI/Badge';
 import { Button } from '../UI/Button';
+import { EmptyState } from '../UI/EmptyState';
 import { Input } from '../UI/Input';
 import { Select } from '../UI/Select';
 import { toast } from '../UI/Toast';
@@ -104,7 +105,12 @@ export function IdentityCard() {
           </Button>
         </CardHeader>
         <CardContent>
-          <p className="text-sm text-[#606080]">No identity registered yet</p>
+          <EmptyState
+            icon="🆔"
+            title="No identity registered yet"
+            description="Register your decentralized identity to interact with compliance-enabled tokens"
+            action={!showRegister ? { label: 'Register', onClick: () => setShowRegister(true) } : undefined}
+          />
           {showRegister && (
             <div className="mt-4 space-y-3">
               <Input

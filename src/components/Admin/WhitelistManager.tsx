@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
 import { Button } from '../UI/Button';
 import { Input } from '../UI/Input';
 import { Badge } from '../UI/Badge';
+import { EmptyState } from '../UI/EmptyState';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { toast } from '../UI/Toast';
 import * as contract from '../../services/contract';
@@ -87,7 +88,7 @@ export function WhitelistManager() {
             Loading whitelist...
           </div>
         ) : entries.length === 0 ? (
-          <p className="text-sm text-[#606080]">No whitelisted addresses</p>
+          <EmptyState icon="📋" title="No whitelisted addresses" description="Add addresses to the whitelist to allow transfers" />
         ) : (
           <div className="space-y-2 max-h-64 overflow-y-auto">
             {entries.map((entry) => (

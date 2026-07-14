@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
 import { Button } from '../UI/Button';
+import { EmptyState } from '../UI/EmptyState';
 import { toast } from '../UI/Toast';
 import { CopyButton } from '../../hooks/useClipboard';
 
@@ -28,7 +29,7 @@ export function TokenBalance() {
       </CardHeader>
       <CardContent>
         {balances.length === 0 ? (
-          <p className="text-sm text-[#606080]">No tokens found</p>
+          <EmptyState icon="💰" title="No tokens found" description="Balances will appear here once you hold tokens" />
         ) : (
           <div className="space-y-2">
             {balances.map((b) => (
