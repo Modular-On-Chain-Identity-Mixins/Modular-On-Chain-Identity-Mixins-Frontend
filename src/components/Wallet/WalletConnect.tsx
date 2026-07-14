@@ -3,6 +3,7 @@ import { Button } from '../UI/Button';
 import { Card } from '../UI/Card';
 import { Badge } from '../UI/Badge';
 import { toast } from '../UI/Toast';
+import { formatAddress } from '../../services/format';
 
 export function WalletConnect() {
   const { isConnected, isConnecting, address, network, error, connect, disconnect } = useWalletStore();
@@ -33,7 +34,7 @@ export function WalletConnect() {
           </div>
           <div className="min-w-0">
             <p className="text-sm font-medium text-[#e8e8f0] truncate">
-              {address.slice(0, 6)}...{address.slice(-4)}
+              {formatAddress(address)}
             </p>
             <Badge variant={network === 'MAINNET' ? 'success' : 'info'}>
               {network || 'Unknown'}

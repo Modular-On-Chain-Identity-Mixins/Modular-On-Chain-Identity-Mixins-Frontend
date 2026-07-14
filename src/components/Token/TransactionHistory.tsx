@@ -3,6 +3,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
 import { Badge } from '../UI/Badge';
 import { Button } from '../UI/Button';
 import { EmptyState } from '../UI/EmptyState';
+import { formatAddress, formatRelativeTime } from '../../services/format';
 
 const STATUS_VARIANT: Record<string, 'success' | 'warning' | 'danger'> = {
   PENDING: 'warning',
@@ -35,10 +36,10 @@ export function TransactionHistory() {
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-mono text-[#e8e8f0] truncate">
-                    {tx.hash.slice(0, 16)}...
+                    {formatAddress(tx.hash, 16)}
                   </p>
                   <p className="text-xs text-[#606080] mt-0.5">
-                    {new Date(tx.timestamp).toLocaleString()}
+                    {formatRelativeTime(tx.timestamp)}
                   </p>
                 </div>
                 <Badge variant={STATUS_VARIANT[tx.status]} size="sm">
