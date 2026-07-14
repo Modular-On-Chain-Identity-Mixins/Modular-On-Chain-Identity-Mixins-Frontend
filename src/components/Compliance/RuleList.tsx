@@ -2,6 +2,7 @@ import { useCompliance } from '../../hooks/useCompliance';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
 import { Badge } from '../UI/Badge';
+import { EmptyState } from '../UI/EmptyState';
 import { Toggle } from '../UI/Toggle';
 import { toast } from '../UI/Toast';
 import { useEffect } from 'react';
@@ -66,7 +67,7 @@ export function RuleList() {
             Loading rules...
           </div>
         ) : rules.length === 0 ? (
-          <p className="text-sm text-[#606080] py-4">No compliance rules configured</p>
+          <EmptyState icon="⚙️" title="No compliance rules configured" description="Add rules to enforce transfer restrictions" />
         ) : (
           <div className="space-y-2">
             {rules.map((rule) => (
