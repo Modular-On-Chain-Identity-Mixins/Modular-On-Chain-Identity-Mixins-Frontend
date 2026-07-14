@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import type { ReactNode } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { WalletConnect } from '../Wallet/WalletConnect';
 import { NetworkSelector } from '../Wallet/NetworkSelector';
+import { ShortcutHelp } from '../UI/ShortcutHelp';
+import { useKeyboardShortcut } from '../../hooks/useKeyboardShortcut';
 import clsx from 'clsx';
 
 const NAV_ITEMS = [
@@ -17,9 +19,16 @@ const NAV_ITEMS = [
 export function Layout({ children }: { children: ReactNode }) {
   const { isConnected } = useWalletStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [shortcutHelpOpen, setShortcutHelpOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useKeyboardShortcut('?', useCallback(() => setShortcutHelpOpen((v) => !v), []));
+  useKeyboardShortcut('t', useCallback(() => navigate('/transfer'), [navigate]));
+  useKeyboardShortcut('d', useCallback(() => navigate('/'), [navigate]));
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
+      <ShortcutHelp open={shortcutHelpOpen} onClose={() => setShortcutHelpOpen(false)} />
       <header className="sticky top-0 z-40 border-b border-[#2a2a3d] bg-[#0a0a0f]/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
