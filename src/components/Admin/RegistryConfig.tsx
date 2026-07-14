@@ -30,7 +30,7 @@ export function RegistryConfig() {
 
   useEffect(() => {
     if (isConnected && publicKey) fetchConfig();
-  }, [isConnected, publicKey]);
+  }, [isConnected, publicKey, fetchConfig]);
 
   const handleSave = async () => {
     if (!publicKey || !config) return;

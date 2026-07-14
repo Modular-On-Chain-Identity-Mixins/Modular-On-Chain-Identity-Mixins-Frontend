@@ -77,11 +77,17 @@ export async function getBalances(
       balance: string;
       asset_contract_id?: string;
     }> = (account as any).balances ?? [];
-    return balances.map((b) => ({
-      asset: b.asset_type === 'native' ? 'XLM' : (b.asset_code ?? 'Unknown'),
-      balance: b.balance,
-      contractId: b.asset_contract_id,
-    }));
+    return balances.map((b) => {
+      let asset = 'Unknown';
+      if (b.asset_type === 'native') {
+        asset = 'XLM';
+      } else if (b.asset_code) {
+        asset = b.asset_code;
+      } else if (b.asset_contract_id) {
+        asset = `Contract:${b.asset_contract_id.slice(0, 8)}`;
+      }
+      return { asset, balance: b.balance, contractId: b.asset_contract_id };
+    });
   } catch {
     return [];
   }
@@ -107,6 +113,26 @@ export async function simulateContractCall(
     .build();
 
   return server.simulateTransaction(tx);
+}
+
+function extractTransactionError(response: rpc.Api.SendTransactionResponse): string {
+  if (response.status === 'ERROR') {
+    try {
+      const result = response.errorResult;
+      if (result) {
+        const switchName = (result as any).switch?.()?.name;
+        if (switchName) return switchName;
+        const resultStr = String(result);
+        if (resultStr && resultStr !== '[object Object]') return resultStr;
+      }
+    } catch {
+    }
+    return 'Transaction rejected by network';
+  }
+  if (response.status === 'TRY_AGAIN_LATER') {
+    return 'Network busy, please try again later';
+  }
+  return 'Unknown error';
 }
 
 export async function sendContractCall(
@@ -135,7 +161,7 @@ export async function sendContractCall(
   }
 
   if (rpc.Api.isSimulationError(simulated)) {
-    throw new Error(`Simulation error: ${simulated.error}`);
+    throw new Error(`Simulation failed. ${simulated.error}`);
   }
 
   const preparedTx = rpc.assembleTransaction(tx, simulated).build();
@@ -148,9 +174,5 @@ export async function sendContractCall(
   if (response.status === 'PENDING' || response.status === 'DUPLICATE') {
     return response.hash;
   }
-  const errorMsg =
-    response.errorResult instanceof Object
-      ? String(response.errorResult)
-      : 'Unknown error';
-  throw new Error(`Transaction failed: ${errorMsg}`);
+  throw new Error(`Transaction failed: ${extractTransactionError(response)}`);
 }

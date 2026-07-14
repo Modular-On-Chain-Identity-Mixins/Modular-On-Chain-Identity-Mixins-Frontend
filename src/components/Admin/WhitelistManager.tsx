@@ -21,7 +21,7 @@ export function WhitelistManager() {
     try {
       const data = await contract.getWhitelist(publicKey);
       setEntries(data);
-    } catch (err) {
+    } catch {
       toast('Failed to load whitelist', 'error');
     } finally {
       setLoading(false);
@@ -30,7 +30,7 @@ export function WhitelistManager() {
 
   useEffect(() => {
     if (isConnected && publicKey) fetchWhitelist();
-  }, [isConnected, publicKey]);
+  }, [isConnected, publicKey, fetchWhitelist]);
 
   const handleAdd = async () => {
     if (!publicKey || !address) {
