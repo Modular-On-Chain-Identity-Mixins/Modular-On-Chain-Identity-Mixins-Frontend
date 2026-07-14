@@ -1,3 +1,4 @@
+import { SeoHead } from '../components/UI/SeoHead';
 import { useWalletStore } from '../contexts/WalletContext';
 import { WalletStatus } from '../components/Wallet/WalletStatus';
 import { IdentityCard } from '../components/Identity/IdentityCard';
@@ -10,6 +11,7 @@ export function Dashboard() {
 
   return (
     <div className="space-y-6">
+      <SeoHead title="Dashboard" description="Modular On-Chain Identity & Compliance Framework overview" />
       <div>
         <h2 className="text-2xl font-bold text-[#e8e8f0]">Dashboard</h2>
         <p className="text-sm text-[#606080] mt-1">

@@ -1,3 +1,4 @@
+import { SeoHead } from '../components/UI/SeoHead';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { TokenTransfer } from '../components/Token/TokenTransfer';
 import { TokenBalance } from '../components/Token/TokenBalance';
@@ -7,6 +8,7 @@ export function TransferPage() {
   return (
     <RequireWallet>
       <div className="space-y-6">
+        <SeoHead title="Token Transfers" description="Transfer tokens with built-in compliance verification" />
         <div>
           <h2 className="text-2xl font-bold text-[#e8e8f0]">Token Transfers</h2>
           <p className="text-sm text-[#606080] mt-1">
