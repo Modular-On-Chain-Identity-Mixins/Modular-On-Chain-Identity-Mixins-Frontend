@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useWalletStore } from '../../contexts/WalletContext';
@@ -14,28 +15,75 @@ const NAV_ITEMS = [
 
 export function Layout({ children }: { children: ReactNode }) {
   const { isConnected } = useWalletStore();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       <header className="sticky top-0 z-40 border-b border-[#2a2a3d] bg-[#0a0a0f]/80 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <NavLink to="/" className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#6c5ce7] flex items-center justify-center">
-                <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-sm font-bold gradient-text">Compliance Kit</h1>
-                <p className="text-[10px] text-[#606080] -mt-0.5">SEP-57 / T-REX for Soroban</p>
-              </div>
-            </NavLink>
-            <div className="w-64">
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg text-[#606080] hover:text-[#e8e8f0] hover:bg-[#1a1a26] transition-colors"
+                aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+              >
+                {mobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+              <NavLink to="/" className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-[#6c5ce7] flex items-center justify-center">
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <div>
+                  <h1 className="text-sm font-bold gradient-text">Compliance Kit</h1>
+                  <p className="text-[10px] text-[#606080] -mt-0.5">SEP-57 / T-REX for Soroban</p>
+                </div>
+              </NavLink>
+            </div>
+            <div className="w-48 sm:w-64">
               <WalletConnect />
             </div>
           </div>
         </div>
+
+        {mobileMenuOpen && (
+          <nav className="lg:hidden border-t border-[#2a2a3d] bg-[#0a0a0f] px-4 py-3 space-y-1">
+            {NAV_ITEMS.map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                end={item.path === '/'}
+                onClick={() => setMobileMenuOpen(false)}
+                className={({ isActive }) =>
+                  clsx(
+                    'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
+                    isActive
+                      ? 'bg-[#6c5ce7]/10 text-[#6c5ce7] border border-[#6c5ce7]/20'
+                      : 'text-[#606080] hover:text-[#e8e8f0] hover:bg-[#1a1a26]',
+                  )
+                }
+              >
+                <item.icon />
+                {item.label}
+              </NavLink>
+            ))}
+            {!isConnected && (
+              <div className="mt-2 p-3 rounded-lg bg-[#ffd600]/5 border border-[#ffd600]/10">
+                <p className="text-xs text-[#ffd600]">Connect wallet to interact</p>
+              </div>
+            )}
+          </nav>
+        )}
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
