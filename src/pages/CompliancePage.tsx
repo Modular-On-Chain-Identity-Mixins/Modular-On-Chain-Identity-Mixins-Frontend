@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { SeoHead } from '../components/UI/SeoHead';
 import { RequireWallet } from '../components/Wallet/RequireWallet';
 import { RuleList } from '../components/Compliance/RuleList';
 import { ComplianceCheck } from '../components/Compliance/ComplianceCheck';
 import { RuleEditor } from '../components/Compliance/RuleEditor';
 import { Button } from '../components/UI/Button';
+import { useKeyboardShortcut } from '../hooks/useKeyboardShortcut';
 
 export function CompliancePage() {
   const [showEditor, setShowEditor] = useState(false);
+  useKeyboardShortcut('n', useCallback(() => setShowEditor((v) => !v), []));
 
   return (
     <RequireWallet>
