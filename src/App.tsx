@@ -20,6 +20,9 @@ const TransferPage = lazy(() =>
 const AdminPage = lazy(() =>
   import('./pages/AdminPage').then((m) => ({ default: m.AdminPage })),
 );
+const NotFoundPage = lazy(() =>
+  import('./pages/NotFoundPage').then((m) => ({ default: m.NotFoundPage })),
+);
 
 function PageLoader() {
   return (
@@ -42,6 +45,7 @@ export default function App() {
               <Route path="/compliance" element={<CompliancePage />} />
               <Route path="/transfer" element={<TransferPage />} />
               <Route path="/admin" element={<AdminPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </Layout>
