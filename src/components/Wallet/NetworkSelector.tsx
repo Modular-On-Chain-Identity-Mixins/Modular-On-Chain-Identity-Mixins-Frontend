@@ -4,7 +4,7 @@ import { Badge } from '../UI/Badge';
 const NETWORKS = ['TESTNET', 'MAINNET'] as const;
 
 export function NetworkSelector() {
-  const { network, desiredNetwork, isConnected, disconnect, setDesiredNetwork } = useWalletStore();
+  const { network, isConnected, disconnect, setDesiredNetwork } = useWalletStore();
 
   if (!isConnected) return null;
 

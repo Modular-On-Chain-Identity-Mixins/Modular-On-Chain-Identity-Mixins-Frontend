@@ -15,10 +15,11 @@ export function CompliancePage() {
 
   return (
     <RequireWallet>
+      <SeoHead title="Compliance Rules" description="Configure granular compliance rules for permissioned tokens" />
       <div className="space-y-6">
-        <SeoHead title="Compliance Rules" description="Configure granular compliance rules for permissioned tokens" />
-        <div>
-          <h2 className="text-2xl font-bold text-[#e8e8f0]">Compliance Rules</h2>
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-bold text-[#e8e8f0]">Compliance Rules</h2>
             <p className="text-sm text-[#606080] mt-1">
               Configure granular compliance rules for permissioned tokens
             </p>
