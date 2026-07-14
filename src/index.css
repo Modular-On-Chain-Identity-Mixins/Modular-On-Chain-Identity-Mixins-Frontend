@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+:root {
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #13131a;
+  --color-bg-card: #1a1a26;
+  --color-bg-card-hover: #222233;
+  --color-border: #2a2a3d;
+  --color-border-active: #3b3b5c;
+  --color-text-primary: #e8e8f0;
+  --color-text-secondary: #9090b0;
+  --color-text-muted: #606080;
+  --color-accent: #6c5ce7;
+  --color-accent-hover: #7f6ff0;
+  --color-success: #00c853;
+  --color-warning: #ffd600;
+  --color-danger: #ff1744;
+  --color-info: #448aff;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #6c5ce7, #a855f7, #448aff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #6c5ce7, #448aff);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+}
+
+.glass-card {
+  background: rgba(26, 26, 38, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(108, 92, 231, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(108, 92, 231, 0.6); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
