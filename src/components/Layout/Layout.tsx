@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { WalletConnect } from '../Wallet/WalletConnect';
+import { NetworkSelector } from '../Wallet/NetworkSelector';
 import clsx from 'clsx';
 
 const NAV_ITEMS = [
@@ -50,8 +51,11 @@ export function Layout({ children }: { children: ReactNode }) {
                 </div>
               </NavLink>
             </div>
-            <div className="w-48 sm:w-64">
-              <WalletConnect />
+            <div className="flex items-center gap-3">
+              <NetworkSelector />
+              <div className="w-48 sm:w-64">
+                <WalletConnect />
+              </div>
             </div>
           </div>
         </div>

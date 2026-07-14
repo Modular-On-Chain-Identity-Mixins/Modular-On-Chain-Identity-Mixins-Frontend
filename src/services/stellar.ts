@@ -25,14 +25,13 @@ function getServer(network: string): rpc.Server {
   return new rpc.Server(RPC_URLS[network]);
 }
 
-export async function connectWallet(): Promise<WalletState> {
+export async function connectWallet(network: string = 'TESTNET'): Promise<WalletState> {
   try {
     const supported = await isAllowed();
     if (!supported) {
       throw new Error('Freighter extension not found.');
     }
     const { address: publicKey } = await getAddress();
-    const network = 'TESTNET';
 
     return {
       address: publicKey,
