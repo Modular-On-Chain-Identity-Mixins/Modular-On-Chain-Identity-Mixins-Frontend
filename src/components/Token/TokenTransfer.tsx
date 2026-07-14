@@ -5,12 +5,15 @@ import { Input } from '../UI/Input';
 import { Badge } from '../UI/Badge';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { useTransactionStore } from '../../store/transactionStore';
+import { useRateLimit } from '../../hooks/useRateLimit';
 import { toast } from '../UI/Toast';
 import * as contract from '../../services/contract';
 
 export function TokenTransfer() {
   const { publicKey, address } = useWalletStore();
   const addTransaction = useTransactionStore((s) => s.addTransaction);
+  const { isLimited: isTransferLimited } = useRateLimit(5000);
+  const { isLimited: isCheckLimited } = useRateLimit(3000);
   const [to, setTo] = useState('');
   const [amount, setAmount] = useState('');
   const [sending, setSending] = useState(false);
@@ -18,6 +21,10 @@ export function TokenTransfer() {
   const [complianceOk, setComplianceOk] = useState<boolean | null>(null);
 
   const handleCheck = async () => {
+    if (isCheckLimited()) {
+      toast('Please wait before checking again', 'warning');
+      return;
+    }
     if (!publicKey || !address || !to || !amount) {
       toast('Fill all fields', 'warning');
       return;
@@ -42,6 +49,10 @@ export function TokenTransfer() {
   };
 
   const handleTransfer = async () => {
+    if (isTransferLimited()) {
+      toast('Please wait before sending another transfer', 'warning');
+      return;
+    }
     if (!publicKey || !address || !to || !amount) {
       toast('Fill all fields', 'warning');
       return;
