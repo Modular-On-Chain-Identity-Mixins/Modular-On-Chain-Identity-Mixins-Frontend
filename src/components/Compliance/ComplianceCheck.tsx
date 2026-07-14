@@ -1,5 +1,6 @@
 import { useCompliance } from '../../hooks/useCompliance';
 import { useWalletStore } from '../../contexts/WalletContext';
+import { useRateLimit } from '../../hooks/useRateLimit';
 import { Card, CardTitle, CardContent } from '../UI/Card';
 import { Badge } from '../UI/Badge';
 import { Button } from '../UI/Button';
@@ -12,8 +13,13 @@ export function ComplianceCheck() {
   const { publicKey, address } = useWalletStore();
   const [to, setTo] = useState('');
   const [amount, setAmount] = useState('');
+  const { isLimited } = useRateLimit(3000);
 
   const handleCheck = async () => {
+    if (isLimited()) {
+      toast('Please wait before checking again', 'warning');
+      return;
+    }
     if (!publicKey || !address || !to || !amount) {
       toast('Fill all fields', 'warning');
       return;
