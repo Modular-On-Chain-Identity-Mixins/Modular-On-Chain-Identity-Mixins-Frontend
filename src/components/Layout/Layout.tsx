@@ -70,7 +70,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </div>
 
         {mobileMenuOpen && (
-          <nav className="lg:hidden border-t border-[#2a2a3d] bg-[#0a0a0f] px-4 py-3 space-y-1">
+          <nav className="lg:hidden border-t border-[#2a2a3d] bg-[#0a0a0f] px-4 py-3 space-y-1" aria-label="Mobile navigation">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.path}
@@ -86,12 +86,12 @@ export function Layout({ children }: { children: ReactNode }) {
                   )
                 }
               >
-                <item.icon />
+                <span aria-hidden="true"><item.icon /></span>
                 {item.label}
               </NavLink>
             ))}
             {!isConnected && (
-              <div className="mt-2 p-3 rounded-lg bg-[#ffd600]/5 border border-[#ffd600]/10">
+              <div className="mt-2 p-3 rounded-lg bg-[#ffd600]/5 border border-[#ffd600]/10" role="status">
                 <p className="text-xs text-[#ffd600]">Connect wallet to interact</p>
               </div>
             )}
@@ -101,7 +101,7 @@ export function Layout({ children }: { children: ReactNode }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex gap-8">
-          <nav className="hidden lg:flex flex-col gap-1 w-48 flex-shrink-0">
+          <nav className="hidden lg:flex flex-col gap-1 w-48 flex-shrink-0" aria-label="Side navigation">
             {NAV_ITEMS.map((item) => (
               <NavLink
                 key={item.path}
@@ -116,12 +116,12 @@ export function Layout({ children }: { children: ReactNode }) {
                   )
                 }
               >
-                <item.icon />
+                <span aria-hidden="true"><item.icon /></span>
                 {item.label}
               </NavLink>
             ))}
             {!isConnected && (
-              <div className="mt-4 p-3 rounded-lg bg-[#ffd600]/5 border border-[#ffd600]/10">
+              <div className="mt-4 p-3 rounded-lg bg-[#ffd600]/5 border border-[#ffd600]/10" role="status">
                 <p className="text-xs text-[#ffd600]">Connect wallet to interact</p>
               </div>
             )}
