@@ -5,6 +5,7 @@ import { Button } from '../UI/Button';
 import { EmptyState } from '../UI/EmptyState';
 import { toast } from '../UI/Toast';
 import { CopyButton } from '../../hooks/useClipboard';
+import { formatBalance } from '../../services/format';
 
 const POLL_INTERVAL = 30_000;
 
@@ -57,9 +58,7 @@ export function TokenBalance() {
                 </div>
                 <div className="text-right flex-shrink-0 ml-2">
                   <p className="text-sm font-mono text-[#e8e8f0]">
-                    {Number(b.balance).toLocaleString(undefined, {
-                      maximumFractionDigits: 7,
-                    })}
+                    {formatBalance(b.balance)}
                   </p>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import { Button } from '../UI/Button';
 import { Input } from '../UI/Input';
 import { Badge } from '../UI/Badge';
 import { EmptyState } from '../UI/EmptyState';
+import { formatAddress } from '../../services/format';
 import { useWalletStore } from '../../contexts/WalletContext';
 import { toast } from '../UI/Toast';
 import * as contract from '../../services/contract';
@@ -98,7 +99,7 @@ export function WhitelistManager() {
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-mono text-[#e8e8f0] truncate">
-                    {entry.address.slice(0, 12)}...{entry.address.slice(-6)}
+                    {formatAddress(entry.address, 12)}
                   </p>
                   {entry.label && (
                     <p className="text-xs text-[#606080]">{entry.label}</p>

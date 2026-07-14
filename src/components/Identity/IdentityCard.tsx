@@ -4,6 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '../UI/Card';
 import { Badge } from '../UI/Badge';
 import { Button } from '../UI/Button';
 import { EmptyState } from '../UI/EmptyState';
+import { formatDate } from '../../services/format';
 import { Input } from '../UI/Input';
 import { Select } from '../UI/Select';
 import { toast } from '../UI/Toast';
@@ -179,7 +180,7 @@ export function IdentityCard() {
         </div>
         {identity.expiry > 0 && (
           <div className="text-xs text-[#606080]">
-            Expires: {new Date(identity.expiry * 1000).toLocaleDateString()}
+            Expires: {formatDate(identity.expiry * 1000)}
           </div>
         )}
       </CardContent>

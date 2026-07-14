@@ -7,6 +7,7 @@ import { useWalletStore } from '../../contexts/WalletContext';
 import { useTransactionStore } from '../../store/transactionStore';
 import { useRateLimit } from '../../hooks/useRateLimit';
 import { toast } from '../UI/Toast';
+import { formatAddress } from '../../services/format';
 import * as contract from '../../services/contract';
 
 export function TokenTransfer() {
@@ -64,7 +65,7 @@ export function TokenTransfer() {
         publicKey,
       );
       addTransaction({ hash: txHash, status: 'PENDING', timestamp: Date.now() });
-      toast(`Transfer submitted: ${txHash.slice(0, 8)}...`, 'success');
+      toast(`Transfer submitted: ${formatAddress(txHash, 8)}`, 'success');
       setTo('');
       setAmount('');
       setComplianceOk(null);

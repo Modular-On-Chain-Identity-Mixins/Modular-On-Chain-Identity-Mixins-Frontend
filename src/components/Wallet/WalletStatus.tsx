@@ -1,5 +1,6 @@
 import { useWalletStore } from '../../contexts/WalletContext';
 import { Card, CardTitle, CardContent } from '../UI/Card';
+import { formatBalance } from '../../services/format';
 
 export function WalletStatus() {
   const { isConnected, address, network, balances } = useWalletStore();
@@ -26,7 +27,7 @@ export function WalletStatus() {
                 <div key={b.asset} className="flex items-center justify-between py-1 px-3 rounded-lg bg-[#13131a]">
                   <span className="text-sm text-[#e8e8f0]">{b.asset}</span>
                   <span className="text-sm font-mono text-[#9090b0]">
-                    {Number(b.balance).toLocaleString(undefined, { maximumFractionDigits: 4 })}
+                    {formatBalance(b.balance, 4)}
                   </span>
                 </div>
               ))}
